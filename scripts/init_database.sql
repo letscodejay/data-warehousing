@@ -1,29 +1,37 @@
 /* ---------------------------------------------------------------------------------------------------------------
 Purpose of the script:
-This script creates a simple data warehouse setup in MySQL.
+This script creates a simple data warehouse setup in MSSQL.
 - Drops and recreates the 'DataWarehouse' database
 - Creates three layers (as databases): bronze, silver, gold
 		* bronze = raw data
 		* silver = cleaned/transformed data
 		* gold   = final curated data for reporting
-        
-Note : In MySQL, SCHEMA and DATABASE mean the same thing. So each layer(bronze, silve, gold) is also a Database.
 ------------------------------------------------------------------------------------------------------------------*/
 
--- Drop and recreate the DataWarehouse database
-DROP DATABASE IF EXISTS DataWarehouse;
+USE master;
+GO
+
+-- Drop and recreate the 'DataWarehouse' database
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
+BEGIN
+    ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE DataWarehouse;
+END;
+GO
+
+-- Create the 'DataWarehouse' database
 CREATE DATABASE DataWarehouse;
+GO
 
--- List databases to confirm
-SHOW DATABASES;
-
--- Switch to DataWarehouse
 USE DataWarehouse;
+GO
 
--- Create Bronze, Silver, and Gold schemas (as databases)
-CREATE DATABASE IF NOT EXISTS bronze;
-CREATE DATABASE IF NOT EXISTS silver;
-CREATE DATABASE IF NOT EXISTS gold;
+-- Create Schemas
+CREATE SCHEMA bronze;
+GO
 
--- List databases to verify creation
-SHOW DATABASES;
+CREATE SCHEMA silver;
+GO
+
+CREATE SCHEMA gold;
+GO
