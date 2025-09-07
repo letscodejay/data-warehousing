@@ -209,6 +209,3 @@ BEGIN
 		      PRINT 'Error Message' + CAST (ERROR_STATE() AS NVARCHAR);
     END CATCH
 END 
-
--- TO execute this procedure
--- EXEC silver.load_silver;
