@@ -120,6 +120,4 @@ BEGIN
     END CATCH
 END;
 
--- Uncomment and select run below to execute the above procedure
--- EXEC bronze.load_bronze;
 

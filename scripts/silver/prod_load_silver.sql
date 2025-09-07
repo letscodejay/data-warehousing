@@ -3,6 +3,7 @@ BEGIN
     DECLARE @batch_start_time DATETIME, @batch_end_time DATETIME;
     BEGIN TRY
       SET @batch_start_time = GETDATE();
+      PRINT '-----------------------------'
       PRINT 'LOADING THE SILVER LAYER....'
       PRINT '-----------------------------'
 
@@ -210,4 +211,4 @@ BEGIN
 END 
 
 -- TO execute this procedure
-EXEC silver.load_silver;
+-- EXEC silver.load_silver;
